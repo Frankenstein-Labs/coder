@@ -53,6 +53,51 @@ L’Agent Runtime est la couche qui permet à une IA externe d’utiliser la pla
 
 Les agents peuvent être spécialisés : tuteur, développeur, testeur, auditeur de sécurité, agent DevOps, agent de documentation ou agent de support. La plateforme doit rester agnostique vis-à-vis du modèle utilisé.
 
+### Stockage de référence et continuité du projet
+
+Le workspace de la plateforme est un environnement d’exécution temporaire. Le dépôt de référence doit rester contrôlé par l’utilisateur, idéalement sur GitHub, GitLab ou Bitbucket. La plateforme fournit la puissance de calcul, les templates, les agents, les tests et l’orchestration, mais elle ne doit pas devenir la seule copie permanente du code.
+
+Lorsqu’un utilisateur active la sauvegarde, il choisit le fournisseur, le compte ou l’organisation, le nom du dépôt et sa visibilité. Le dépôt doit être privé par défaut. La plateforme peut créer un dépôt dédié après consentement explicite, puis pousser le code vers une branche de travail ou préparer une pull request.
+
+```text
+Dépôt Git de l’utilisateur
+  = référence à long terme
+
+Workspace de la plateforme
+  = environnement de travail temporaire
+  = exécution humaine et IA
+  = tests et artefacts
+
+Bot de synchronisation
+  = sauvegarde autorisée
+  = branche ou pull request
+  = journal des opérations
+  = aucune permission globale par défaut
+```
+
+Le système doit proposer trois politiques. La politique manuelle exige une action pour chaque sauvegarde. La politique assistée prépare un commit ou une pull request et demande confirmation. La politique automatique exécute des règles déjà approuvées, avec des limites de durée, de branche et de budget. La politique assistée est recommandée pour le MVP.
+
+### Continuité après inactivité
+
+La déconnexion ne doit pas être le seul déclencheur. Le cycle de vie doit détecter l’inactivité du workspace, avertir l’utilisateur, arrêter les ressources coûteuses et préserver le dernier état validé. Avant toute suppression, plusieurs notifications doivent expliquer la date limite, le contenu concerné et la destination de la sauvegarde.
+
+| Situation | Action recommandée |
+|---|---|
+| Inactivité courte | Notification et conservation du workspace |
+| Inactivité prolongée | Proposition de sauvegarde vers le dépôt choisi |
+| Avant expiration | Avertissements avec date limite et option de conservation |
+| Expiration autorisée | Dernier commit ou snapshot transféré vers le dépôt de référence |
+| Échec du transfert | Conservation temporaire, nouvelle tentative et alerte explicite |
+| Retour de l’utilisateur | Recréation d’un workspace depuis le dépôt Git |
+
+Le transfert ne doit jamais copier silencieusement un compte entier. Il doit se baser sur le dernier commit cohérent, vérifier que les tests ou l’état Git sont connus et confirmer le résultat. Les secrets, tokens, clés cloud et fichiers sensibles ne doivent pas être poussés automatiquement.
+
+### Bot de synchronisation
+
+Le bot est un collaborateur limité. Il peut lire un dépôt sélectionné, créer une branche dédiée, pousser un commit autorisé, exécuter les tests et ouvrir une pull request. Il ne peut pas fusionner dans `main`, supprimer un dépôt, lire les secrets ou accéder aux dépôts non sélectionnés, sauf autorisation distincte et explicite.
+
+Chaque jeton du bot doit être temporaire, révocable, lié à un workspace et limité par dépôt, branche, action, réseau, ressources et budget. Toutes les opérations doivent apparaître dans un journal consultable par l’utilisateur.
+
 ### Real Issue Lab
 
 Real Issue Lab transforme une issue réelle en mission de développement. Une tâche GitHub, GitLab, un ticket interne ou un exercice peut être associé à un dépôt, une branche de départ, un template, des tests et des critères de réussite.
