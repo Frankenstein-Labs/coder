@@ -53,6 +53,8 @@ L’Agent Runtime est la couche qui permet à une IA externe d’utiliser la pla
 
 Les agents peuvent être spécialisés : tuteur, développeur, testeur, auditeur de sécurité, agent DevOps, agent de documentation ou agent de support. La plateforme doit rester agnostique vis-à-vis du modèle utilisé.
 
+La conception détaillée du bot de synchronisation, du cycle de vie des workspaces, des flux OAuth, des permissions GitHub/GitLab/Bitbucket, des webhooks et des interfaces d’API est documentée dans [SYNC_BOT_TECHNICAL_SPEC.md](./SYNC_BOT_TECHNICAL_SPEC.md).
+
 ### Stockage de référence et continuité du projet
 
 Le workspace de la plateforme est un environnement d’exécution temporaire. Le dépôt de référence doit rester contrôlé par l’utilisateur, idéalement sur GitHub, GitLab ou Bitbucket. La plateforme fournit la puissance de calcul, les templates, les agents, les tests et l’orchestration, mais elle ne doit pas devenir la seule copie permanente du code.
