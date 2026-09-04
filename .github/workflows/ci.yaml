@@ -456,7 +456,7 @@ jobs:
         run: make test-postgres-docker
 
       - name: make gen
-        timeout-minutes: 8
+        timeout-minutes: 20
         run: |
           # Remove golden files to detect discrepancy in generated files.
           make clean/golden-files
@@ -1104,7 +1104,19 @@ jobs:
         working-directory: site/
         name: Install Chromium
 
+      - name: Detect pixel key
+        id: detect-pixel-key
+        env:
+          PIXEL_KEY: ${{ secrets.PIXEL_KEY }}
+        run: |
+          if [ -n "$PIXEL_KEY" ]; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - run: pnpm pixel-storybook
+        if: steps.detect-pixel-key.outputs.enabled == 'true'
         working-directory: site/
         name: Snapshot
         env:

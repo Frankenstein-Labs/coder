@@ -1,7 +1,7 @@
 {
-	"name": "Coder Agents",
+	"name": "CodeNest Agents",
 	"short_name": "Agents",
-	"description": "AI coding agents powered by Coder",
+	"description": "AI coding agents powered by CodeNest",
 	"start_url": "/agents",
 	"scope": "/",
 	"display": "standalone",

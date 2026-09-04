@@ -754,7 +754,7 @@ func applicationNameOrDefault(cfg codersdk.AppearanceConfig) string {
 	if cfg.ApplicationName != "" {
 		return cfg.ApplicationName
 	}
-	return "Coder"
+	return "CodeNest"
 }
 
 // OnlyFiles returns a new fs.FS that only contains files. If a directory is
