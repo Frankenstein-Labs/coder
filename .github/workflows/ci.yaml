@@ -1082,9 +1082,6 @@ jobs:
   storybook:
     name: Storybook
 
-    env:
-      PIXEL_KEY: ${{ secrets.PIXEL_KEY }}
-
     runs-on: ${{ github.repository_owner == 'coder' && 'depot-ubuntu-24.04-16' || 'ubuntu-latest' }}
 
     steps:
@@ -1107,11 +1104,18 @@ jobs:
         working-directory: site/
         name: Install Chromium
 
+      - name: Detect pixel key
+        id: detect-pixel-key
+        env:
+          PIXEL_KEY: ${{ secrets.PIXEL_KEY }}
+        run: echo "enabled=$([ -n \"$PIXEL_KEY\" ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
+
       - run: pnpm pixel-storybook
-        if: env.PIXEL_KEY != ''
+        if: steps.detect-pixel-key.outputs.enabled == 'true'
         working-directory: site/
         name: Snapshot
         env:
+          PIXEL_KEY: ${{ secrets.PIXEL_KEY }}
           PIXEL_AUTO_REVIEW: ${{ github.repository_owner == 'coder' && github.ref_name == 'main' }}
 
   offlinedocs:
