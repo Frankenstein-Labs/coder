@@ -1108,7 +1108,12 @@ jobs:
         id: detect-pixel-key
         env:
           PIXEL_KEY: ${{ secrets.PIXEL_KEY }}
-        run: echo "enabled=$([ -n \"$PIXEL_KEY\" ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
+        run: |
+          if [ -n "$PIXEL_KEY" ]; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+          fi
 
       - run: pnpm pixel-storybook
         if: steps.detect-pixel-key.outputs.enabled == 'true'
