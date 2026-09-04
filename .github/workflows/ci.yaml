@@ -456,7 +456,7 @@ jobs:
         run: make test-postgres-docker
 
       - name: make gen
-        timeout-minutes: 8
+        timeout-minutes: 20
         run: |
           # Remove golden files to detect discrepancy in generated files.
           make clean/golden-files
@@ -1082,6 +1082,9 @@ jobs:
   storybook:
     name: Storybook
 
+    env:
+      PIXEL_KEY: ${{ secrets.PIXEL_KEY }}
+
     runs-on: ${{ github.repository_owner == 'coder' && 'depot-ubuntu-24.04-16' || 'ubuntu-latest' }}
 
     steps:
@@ -1105,10 +1108,10 @@ jobs:
         name: Install Chromium
 
       - run: pnpm pixel-storybook
+        if: env.PIXEL_KEY != ''
         working-directory: site/
         name: Snapshot
         env:
-          PIXEL_KEY: ${{ secrets.PIXEL_KEY }}
           PIXEL_AUTO_REVIEW: ${{ github.repository_owner == 'coder' && github.ref_name == 'main' }}
 
   offlinedocs:
