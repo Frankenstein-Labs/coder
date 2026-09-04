@@ -29,15 +29,15 @@ Dépôt Git
 
 ## Publics et modes d’utilisation
 
-| Mode | Utilisateurs | Valeur principale |
-|---|---|---|
-| Learn | Débutants, étudiants et personnes en reconversion | Apprendre dans un environnement guidé |
-| Build | Développeurs individuels et freelances | Développer sans installer toute la chaîne locale |
-| Team | Startups et équipes professionnelles | Partager des environnements et collaborer |
-| Open Source | Mainteneurs et contributeurs | Traiter des issues et accueillir des contributions |
-| Enterprise | Grandes organisations | Gouvernance, sécurité, SSO, audit et contrôle des coûts |
-| Research | Laboratoires et chercheurs | Environnements reproductibles et données contrôlées |
-| Agent | Agents IA et outils tiers | Exécuter des tâches de développement avec des permissions limitées |
+| Mode        | Utilisateurs                                      | Valeur principale                                                  |
+|-------------|---------------------------------------------------|--------------------------------------------------------------------|
+| Learn       | Débutants, étudiants et personnes en reconversion | Apprendre dans un environnement guidé                              |
+| Build       | Développeurs individuels et freelances            | Développer sans installer toute la chaîne locale                   |
+| Team        | Startups et équipes professionnelles              | Partager des environnements et collaborer                          |
+| Open Source | Mainteneurs et contributeurs                      | Traiter des issues et accueillir des contributions                 |
+| Enterprise  | Grandes organisations                             | Gouvernance, sécurité, SSO, audit et contrôle des coûts            |
+| Research    | Laboratoires et chercheurs                        | Environnements reproductibles et données contrôlées                |
+| Agent       | Agents IA et outils tiers                         | Exécuter des tâches de développement avec des permissions limitées |
 
 ## Fonctionnalités principales
 
@@ -91,18 +91,18 @@ Une IA externe ne doit jamais recevoir une clé générale donnant accès à tou
 
 Chaque jeton doit pouvoir être restreint par :
 
-| Dimension | Exemple de restriction |
-|---|---|
-| Dépôt | Un seul dépôt privé ou public |
-| Branche | Une branche de travail, sans accès direct à `main` |
-| Workspace | Un environnement précis |
-| Actions | Lecture, écriture, tests, pull request |
-| Commandes | Allowlist de commandes autorisées |
-| Réseau | Domaines ou destinations autorisés |
-| Durée | Expiration après une durée courte |
-| Ressources | CPU, mémoire, GPU et durée maximale |
-| Budget | Montant maximal d’utilisation |
-| Secrets | Aucun accès par défaut |
+| Dimension  | Exemple de restriction                             |
+|------------|----------------------------------------------------|
+| Dépôt      | Un seul dépôt privé ou public                      |
+| Branche    | Une branche de travail, sans accès direct à `main` |
+| Workspace  | Un environnement précis                            |
+| Actions    | Lecture, écriture, tests, pull request             |
+| Commandes  | Allowlist de commandes autorisées                  |
+| Réseau     | Domaines ou destinations autorisés                 |
+| Durée      | Expiration après une durée courte                  |
+| Ressources | CPU, mémoire, GPU et durée maximale                |
+| Budget     | Montant maximal d’utilisation                      |
+| Secrets    | Aucun accès par défaut                             |
 
 Le jeton doit être affiché une seule fois, stocké de manière sécurisée, révocable immédiatement et associé à un journal d’utilisation.
 
@@ -142,41 +142,41 @@ Les établissements et entreprises doivent pouvoir déployer la plateforme sur l
 
 La plateforme peut gagner de l’argent en facturant les ressources réellement consommées et les services à valeur ajoutée.
 
-| Ressource ou service | Mode de facturation possible |
-|---|---|
-| CPU et mémoire | Durée et taille du workspace |
-| GPU | Temps d’utilisation |
-| Stockage | Volume et durée de conservation |
-| Trafic réseau | Volume sortant selon l’offre |
-| Workspaces persistants | Abonnement ou coût horaire |
-| Workspaces temporaires | Facturation à la minute |
-| Agents hébergés | Exécution, orchestration et supervision |
-| Logs et artefacts | Volume et durée de conservation |
-| Templates premium | Abonnement, licence ou commission |
-| Support et déploiement privé | Offre entreprise |
+| Ressource ou service         | Mode de facturation possible            |
+|------------------------------|-----------------------------------------|
+| CPU et mémoire               | Durée et taille du workspace            |
+| GPU                          | Temps d’utilisation                     |
+| Stockage                     | Volume et durée de conservation         |
+| Trafic réseau                | Volume sortant selon l’offre            |
+| Workspaces persistants       | Abonnement ou coût horaire              |
+| Workspaces temporaires       | Facturation à la minute                 |
+| Agents hébergés              | Exécution, orchestration et supervision |
+| Logs et artefacts            | Volume et durée de conservation         |
+| Templates premium            | Abonnement, licence ou commission       |
+| Support et déploiement privé | Offre entreprise                        |
 
 Les coûts doivent être séparés en trois catégories : infrastructure, services de la plateforme et services de fournisseurs externes. Si l’utilisateur apporte sa propre clé de modèle, la plateforme facture principalement l’infrastructure et l’orchestration. Si elle fournit le modèle, le coût de celui-ci doit apparaître séparément.
 
 Les offres peuvent être structurées ainsi :
 
-| Offre | Positionnement |
-|---|---|
-| Free | Ressources limitées et templates publics |
-| Developer | Dépôts privés, workspaces persistants et davantage de ressources |
-| Team | Collaboration, quotas partagés, audit et facturation centralisée |
-| Enterprise | SSO, politiques avancées, réseau privé, support et self-hosted |
+| Offre        | Positionnement                                                       |
+|--------------|----------------------------------------------------------------------|
+| Free         | Ressources limitées et templates publics                             |
+| Developer    | Dépôts privés, workspaces persistants et davantage de ressources     |
+| Team         | Collaboration, quotas partagés, audit et facturation centralisée     |
+| Enterprise   | SSO, politiques avancées, réseau privé, support et self-hosted       |
 | Platform/API | Facturation des appels et ressources consommées par des outils tiers |
 
 ## Architecture par couches
 
 Le socle doit être organisé en quatre niveaux :
 
-| Niveau | Responsabilité |
-|---|---|
-| Infrastructure | Workspaces, réseau, images, stockage, quotas et cycle de vie |
-| Plateforme | Identité, organisations, dépôts, agents, API, permissions et audit |
-| Expériences | Developer Cloud, Real Issue Lab, Course Studio, portfolio et console équipe |
-| Écosystème | Catalogue, marketplace, partenaires, agents et intégrations externes |
+| Niveau         | Responsabilité                                                              |
+|----------------|-----------------------------------------------------------------------------|
+| Infrastructure | Workspaces, réseau, images, stockage, quotas et cycle de vie                |
+| Plateforme     | Identité, organisations, dépôts, agents, API, permissions et audit          |
+| Expériences    | Developer Cloud, Real Issue Lab, Course Studio, portfolio et console équipe |
+| Écosystème     | Catalogue, marketplace, partenaires, agents et intégrations externes        |
 
 Le code Coder existant sert principalement de base pour les deux premiers niveaux. Les fonctions pédagogiques, marketplace et portfolio doivent être développées comme des modules distincts, avec leurs propres permissions, API, tests et interfaces.
 
@@ -186,24 +186,24 @@ Le premier produit doit valider un parcours universel plutôt que tenter de cons
 
 > **Un développeur se connecte avec GitHub, choisit un dépôt et un template, crée un workspace, génère un jeton limité, autorise une IA externe à utiliser ce workspace, puis obtient des tests et une pull request.**
 
-| Fonction | Priorité |
-|---|---:|
-| Connexion GitHub | Très haute |
-| Sélection du dépôt et de la branche | Très haute |
-| Création d’un workspace depuis un template | Très haute |
-| Jetons limités et révocables | Très haute |
-| API workspace | Très haute |
-| Exécution de commandes contrôlées | Très haute |
-| Logs et audit | Très haute |
-| Limites de temps et de ressources | Très haute |
-| Tests automatisés | Haute |
-| Commit et pull request | Haute |
-| GitLab et Bitbucket | Haute |
-| Facturation par usage | Haute |
-| MCP officiel | Haute |
-| Marketplace d’agents | Phase suivante |
-| Cours et portfolios | Phase suivante |
-| GPU et recherche | Phase suivante |
+| Fonction                                   |       Priorité |
+|--------------------------------------------|---------------:|
+| Connexion GitHub                           |     Très haute |
+| Sélection du dépôt et de la branche        |     Très haute |
+| Création d’un workspace depuis un template |     Très haute |
+| Jetons limités et révocables               |     Très haute |
+| API workspace                              |     Très haute |
+| Exécution de commandes contrôlées          |     Très haute |
+| Logs et audit                              |     Très haute |
+| Limites de temps et de ressources          |     Très haute |
+| Tests automatisés                          |          Haute |
+| Commit et pull request                     |          Haute |
+| GitLab et Bitbucket                        |          Haute |
+| Facturation par usage                      |          Haute |
+| MCP officiel                               |          Haute |
+| Marketplace d’agents                       | Phase suivante |
+| Cours et portfolios                        | Phase suivante |
+| GPU et recherche                           | Phase suivante |
 
 ## Feuille de route
 
